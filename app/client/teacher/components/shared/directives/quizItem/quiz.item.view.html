@@ -1,0 +1,75 @@
+<div class="row quiz-container">
+    <div class="quiz-drag-container">
+    </div>
+    <div class="col-md-12 quiz-container-col">
+        <!-- ng-attr-no-drag="{{disableEdit || undefined}}" -->
+        <div class="row quiz-container-row">
+            <div class="col-md-3 col-sm-3 quiz-logo-container">
+                <div class="img-container small-img-container">
+                    <div class="img-sub-container">
+                        <img class="small-img-size" ng-src="{{ quiz.imageUrl || '../public/images/icons/no-image-found.jpg' }}" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="quiz-container-title">
+                    <img src='../public/images/icons/quizz-icon.svg' /> {{ quiz.title }}
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3 quiz-actions-container">
+                <a href="#" ng-click='editQuiz(disableEdit)' class="quiz-action-edit"
+                   ng-class="{'a-disabled': disableEdit}">
+                    <div class="img-container icon-wrapper-new icon-wrapper-btn">
+                        <div class="img-sub-container icon-sub-wrapper">
+                            <img />
+                        </div>
+                    </div>
+                </a>
+                <a href class="quiz-action-copy" ng-click="copy({ source: list, position: index })"
+                   ng-class="{'a-disabled': disableEdit}">
+                    <div class="img-container icon-wrapper-new icon-wrapper-btn">
+                        <div class="img-sub-container icon-sub-wrapper">
+                            <img />
+                        </div>
+                    </div>
+                </a>
+                <a href class="quiz-action-remove" ng-click="remove({ id: quiz._id, source: list, position: index })"
+                   ng-class="{'a-disabled': disableEdit}">
+                    <div class="img-container icon-wrapper-new icon-wrapper-btn">
+                        <div class="img-sub-container icon-sub-wrapper">
+                            <img />
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="row quiz-container-row">
+            <div class="col-md-2 col-sm-2 quiz-visibility">
+                <div class="img-container icon-wrapper-new" ng-class="{'icon-wrapper-active': isPublicVisibility()}">
+                    <div class="img-sub-container icon-sub-wrapper">
+                    <img ng-src="{{ getVisibilityIcon(); }}"/>
+                    </div>
+                </div>
+                &nbsp;<span class="quiz-icon-text quiz-text-info">{{ quiz.visible }}</span>
+            </div>
+            <div class="col-md-2 col-sm-2 favourites">
+                <div class="img-container icon-wrapper-new"
+                     ng-class="{'icon-wrapper-active': isFavourite()}"
+                     ng-click="switchFavourites()"><!--addToFavourites({quizId: quiz._id})-->
+                    <div class="img-sub-container icon-sub-wrapper">
+                        <img style="" ng-src="{{ getFavouriteIcon(); }}"/>
+                    </div>
+                </div>
+                &nbsp;<span class="quiz-icon-text quiz-text-info">{{ getFavouriteLabel() }}</span>
+            </div>
+            <div class="col-md-8 col-sm-8 quiz-btn-container">
+                <button class="secondary-btn quiz-action-asign pull-right" ng-click="assign({quizTitle: quiz.title})">
+                    <span class="secondary-btn-text">Assign to</span>
+                </button>
+                <button class="primary-btn pull-right" ng-click="participate({quizId: quiz._id})">
+                    <span class="primary-btn-text">Participate</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

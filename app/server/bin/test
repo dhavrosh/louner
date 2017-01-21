@@ -1,0 +1,30 @@
+const http = require('http'),
+    path = require('path'),
+    envMode = process.env.MODE || 'test';
+
+process.env.ROOT = path.join(__dirname, '../../..');
+process.env.PUBLIC_PATH = path.join(__dirname, '../../client/public');
+process.env.TEST_PATH = path.join('./app/server/api/tests/specs');
+
+// load all config variables
+const dotenv = require('dotenv');
+dotenv.config({ path: `./app/server/config/.env.${envMode}` });
+
+const app = require('../app'),
+    port = process.env.PORT || 3001;
+
+app.set('port', port);
+
+const server = http.createServer(app);
+
+exports.listen = done => {
+    server.listen(port, done);
+    console.log(`Running in ${envMode} MODE on port ${port}`);
+};
+
+exports.close = done => {
+    server.close(done);
+};
+
+
+

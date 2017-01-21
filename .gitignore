@@ -1,0 +1,23 @@
+# avoiding node_modules, use "npm i"
+node_modules
+
+# avoiding webstorm workspace settings
+.idea
+
+# avoiding bower_components, use "bower i"
+app/client/public/lib
+
+# avoiding quiz resources
+app/server/resources
+
+# avoiding quiz config files
+app/server/config
+
+# delete vscode debugger file
+.vscode
+
+# file compiled by gulp
+app/client/public/js/app.teacher.min.js
+
+# quiz images 
+app/client/public/images/quizes

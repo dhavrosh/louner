@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>check-mark-button</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="14.874 0.285652174 0.04 0.285652174 0.04 29.3484783 29.708 29.3484783 29.708 0.285652174"></polygon>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="empty-state-for-no-image" transform="translate(-915.000000, -572.000000)">
+            <g id="answer-1" transform="translate(425.000000, 554.000000)">
+                <g id="check-mark-button" transform="translate(490.000000, 18.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Clip-2"></g>
+                    <path d="M14.854,0.285652174 C6.664,0.285652174 0,6.80478261 0,14.8173913 C0,22.8293478 6.664,29.3484783 14.854,29.3484783 C23.044,29.3484783 29.708,22.8293478 29.708,14.8173913 C29.708,6.80478261 23.044,0.285652174 14.854,0.285652174 Z M21.284,11.838913 L13.5026667,19.4484783 C13.268,19.6780435 12.9606667,19.7928261 12.656,19.7928261 C12.3486667,19.7928261 12.044,19.6780435 11.81,19.4484783 L8.42733333,16.1393478 C7.95866667,15.6808696 7.95866667,14.9419565 8.42733333,14.4834783 C8.89333333,14.025 9.65133333,14.025 10.12,14.4834783 L12.656,16.965 L19.5913333,10.1830435 C20.0573333,9.72456522 20.8153333,9.72456522 21.284,10.1830435 C21.75,10.6415217 21.75,11.3804348 21.284,11.838913 Z" id="Fill-1" fill="#50E3C2" mask="url(#mask-2)"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

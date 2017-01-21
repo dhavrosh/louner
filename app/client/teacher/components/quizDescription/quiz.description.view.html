@@ -1,0 +1,157 @@
+<link rel="stylesheet" href="../public/css/quiz.description.css">
+
+<div id="question-page-container">
+
+    <div class="quiz-content-container-wrapper" ng-cloak>
+        <form name="quizForm" ng-submit="vm.createQuiz(quizForm.$valid, quizForm)" class="inline-form" novalidate>
+            <input type="hidden" value="{{vm.isPristine = quizForm.$pristine}}">
+            <div class="row">
+                <div class="col-md-6 quiz-page-close-button-container">
+                    <button type="button" class="secondary-btn" ng-click="vm.closePage()">
+                        <img src="../public/images/icons/close-blue.svg">
+                        <span class="secondary-btn-text">Close</span>
+                    </button>
+                </div>
+                <div class="col-md-6 quiz-page-save-button-container">
+                    <button type="submit" class="primary-btn pull-right" ng-disabled="vm.isBusy">
+                        <span class="primary-btn-text">Next</span>
+                    </button>
+                </div>
+            </div>
+            <div class="quiz-content-container">
+                <alert options="vm.alertOptions"></alert>
+
+                <div class="row top-row">
+                    <div class="col-md-8 left-column">
+
+                        <md-input-container class="md-block">
+                            <label>Title (required)</label>
+                            <input ng-required="true" md-maxlength="90" maxlength="90" err-message="Please add title"
+                                   name="title" ng-model="vm.title">
+                            <div ng-messages="quizForm.title.$error">
+                                <div ng-message="required">Title is required</div>
+                            </div>
+                        </md-input-container>
+
+                        <md-input-container class="quiz-create-input md-block">
+                            <label>Description (required)</label>
+                            <input ng-required="true" md-maxlength="90" maxlength="90" err-message="Please add video"
+                                   name="description" ng-model="vm.description">
+                            <!--<a class="symbol-picker-button" ng-click="vm.openSymbolPicker('questionText', null)">Add special
+                                symbol</a>-->
+                            <div ng-messages="quizForm.description.$error">
+                                <div ng-message="required">Description is required</div>
+                                <!--<div ng-message="maxLength">ERROR</div>-->
+                            </div>
+
+                        </md-input-container>
+
+                        <md-chips class="keywords-chips" md-max-chips="9" ng-model="vm.keywords" md-separator-keys="vm.separatorKeys" placeholder="Keywords">
+                            <span md-chip-remove class="md-primary">
+                                <!--<md-icon md-svg-icon="md-close"></md-icon>-->
+                                <img class="chip-remove-img" src="../public/images/icons/close-black.svg">
+                            </span>
+                        </md-chips>
+                        <br/>
+                        <div class="quiz-visibility-wrapper">
+
+                            <button uib-popover="Choose if you quiz will be public or private" popover-trigger="'mouseenter'" type="button" class="show-popover-button"
+                                popover-placement="right"></button>
+                            <label>Visible to:</label><br/><br/>
+                            <md-radio-group ng-model="vm.selectedVisible">
+
+                                <md-radio-button class="visibility-radio-buttons" value="{{visible}}" ng-repeat="visible in vm.visibleTo">
+                                    {{visible}}
+                                </md-radio-button>
+                            </md-radio-group>
+
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 drag-and-drop-column">
+                        <button uib-popover="Choose cover image to quiz" popover-trigger="'mouseenter'" type="button" class="show-popover-button"
+                            popover-placement="right"></button>
+                        <label class="img-cover-label">Cover image</label>
+                        <div class="image-upload-container img-container large-img-container" ngf-drop ng-model="vm.image" ngf-pattern="'image/*'"
+                            ngf-accept="'image/*'" ngf-drag-over-class="'image-upload-dragover'" ngf-max-size="20MB">
+
+                            <div class="clickable-area-in-dropdown img-sub-container img-drag-drop-container" ngf-select ng-model="vm.image" ngf-pattern="'image/*'"
+                                ngf-accept="'image/*'" ngf-max-size="20MB">
+
+                                <div ng-if="!vm.image" class="drop-ddown-image-wrapper">
+                                    <img ng-if="!vm.image" ng-src="{{ vm.imageUrl || '../public/images/icons/drag-and-drop-img.svg'}}" class="uploaded-background large-img-size">
+                                    <p class="drag-n-drop-first-p">Drag & drop</p>
+                                    <p class="drag-n-drop-second-p">your file, or browse</p>
+                                    <p class="drag-n-drop-third-p">Leave empty if no images available</p>
+                                </div>
+                                <img ngf-thumbnail="vm.image" class="large-img-size" />
+
+                            </div>
+                            <a href ng-if="vm.image" class="drop-down-img-remove" ng-click="vm.removeImage()">
+                                <div class="icon-wrapper icon-wrapper-btn">
+                                    <img class="icon-img" src='../public/images/icons/delete.svg' />
+                                </div>
+                            </a>
+
+                            <button ng-if="vm.image" type="button" class="primary-btn replace-img-btn" ngf-select ng-model="vm.image" ngf-pattern="'image/*'"
+                                ngf-accept="'image/*'" ngf-max-size="20MB">
+                                <span class="primary-btn-text">Replace</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+
+                        <button uib-popover="Choose language of your quiz" popover-trigger="'mouseenter'" type="button" class="show-popover-button language-selection-hint"
+                            popover-placement="up"></button>
+
+                        <div id="language" style="width: 90%; float: right;">
+                            <!-- <button uib-popover="Choose language of your quiz" popover-trigger="'mouseenter'" type="button"
+                                     class="show-popover-button"
+                                     popover-placement="up"></button>-->
+
+                            <material-select wrapper-id="#language" select-options="vm.languages" label="vm.languageLabel" model="vm.selectedLanguage"></material-select>
+
+                        </div>
+                        <div class="language-select-border"></div>
+                    </div>
+
+                    <div class="col-md-5" id="audience">
+                        <material-select name="audience" class="input-error-block" ng-model="vm.selectedAudience" err-message="Please add audience"
+                                         ng-class="{'has-error': quizForm.audience.$error.required && (!quizForm.audience.$pristine || quizForm.$submitted)}"
+                            required="true" error-message="vm.audienceErrorMsg" wrapper-id="#audience" select-options="vm.audiences"
+                            label="vm.audienceLabel" model="vm.selectedAudience"></material-select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 credit-resources">
+                        <button uib-popover="Choose if here will be some credit resources" popover-trigger="'mouseenter'" type="button" class="show-popover-button input-hint"
+                            popover-placement="up"></button>
+                        <md-input-container class="md-block">
+
+                            <label class="label-with-hint">Credit </label>
+                            <textarea class="input-with-hint" md-maxlength="1000" maxlength="1000" name="creditResources" ng-model="vm.creditResources"></textarea>
+
+                        </md-input-container>
+
+                        <button uib-popover="Paste here video url for your quiz" popover-trigger="'mouseenter'" type="button" class="show-popover-button video-hint"
+                            popover-placement="up"></button>
+                        <md-input-container class="md-block">
+                            <label class="label-with-hint">
+                                {{ quizForm.videoUrl.$error.youtubeUrl ? 'Invalid Youtube Url' : 'Intro Video: https://www.youtube.com/'}}
+                            </label>
+                            <input class="input-with-hint" name="videoUrl" ng-model="vm.videoUrl"
+                                   youtube-url-validator err-message="Please type correct YouTube Url">
+                            <div ng-messages="quizForm.videoUrl.$error">
+                                <div ng-message="">Type correct YouTube Url</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

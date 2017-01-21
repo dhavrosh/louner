@@ -1,0 +1,17 @@
+<link rel="stylesheet" href="../public/css/alert.css">
+
+<div class="alert-container ng-hide" ng-show="alert.show"> <!---->
+        <div class="row">
+                <div class="col-md-1">
+                        <img ng-src="{{icons[alert.type]}}" />
+                </div>
+                <div class="col-md-10 alert-message-col">
+                        <span class="alert-message">
+                                {{ alert.message }}
+                        </span> <!---->
+                </div>
+                <div class="col-md-1">
+                        <img src="../public/images/icons/close.svg" class="alert-btn pull-right" ng-click="close()" />
+                </div>
+        </div>
+</div>

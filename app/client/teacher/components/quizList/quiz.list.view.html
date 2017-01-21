@@ -1,0 +1,94 @@
+<link rel="stylesheet" href="../public/css/quiz.list.css" />
+
+<div class="quiz-list-container" ng-cloak>
+        <nav class="navbar quiz-navbar">
+            <ul class="nav navbar-nav">
+                <li>
+                    <button href="/quiz" class="primary-btn" ng-click="vm.createQuiz()">
+                        <img src='../public/images/icons/plus.svg'/>
+                        <span class="primary-btn-text">
+                            &nbsp;Create
+                        </span>
+                    </button>
+                </li>
+            </ul>
+            <nav class="navbar navbar-right navbar-user">
+                <div class="container-fluid">
+                    <img src="/public/images/icons/frank-young.jpg" class="oval-3">
+                    <span class="user-name">Frank Young </span>
+                </div>
+            </nav>
+        </nav>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tabset-container">
+                    <div class="quiz-search-container"
+                         ng-class="{ 'quiz-search-container-hover': vm.isSearchHovered || vm.searchText }"
+                         ng-mouseenter="vm.isSearchHovered = true"
+                         ng-mouseleave="vm.isSearchHovered = false">
+                        <img class="quiz-search-icon" src='../public/images/icons/search-icon.svg' />
+                        <div class="quiz-search-subcontainer">
+                            <input type="text" class="quiz-search" ng-model="vm.searchText" ng-disabled="!vm.isSearchHovered">
+                        </div>
+                        <img class="quiz-search-close" ng-click="vm.clearSearchText()"
+                             src='../public/images/icons/close-search.svg' />
+                    </div>
+                    <uib-tabset class="quiz-tabset" active="vm.activeTab">
+                        <uib-tab index="0" select="vm.getQuizzesByCreator()" heading="Created by Me">
+                            <div ng-class="{ 'quiz-item-last' : $last }" ng-repeat="quiz in vm.myQuizzes | filter: vm.searchQuiz track by $index">
+                                <quiz-item copy="vm.copyQuiz(source, position)"
+                                           remove="vm.removeQuiz(id, source, position)"
+                                           participate="vm.participate(quizId)"
+                                           quiz="quiz"
+                                           list="myQuizzes"
+                                           index="{{ $index }}"
+                                           tab="0"
+                                           assign="vm.assign(quizTitle)">
+                                </quiz-item>
+                            </div>
+                            <div ng-hide="vm.myQuizzes.length">
+                                Sorry, here no any created quizzes
+                            </div>
+                        </uib-tab>
+                        <uib-tab index="1" heading="Assigned">Assigned</uib-tab>
+                        <uib-tab index="2" select="vm.getFavouriteQuizzes()" heading="Favourite">
+                            <div ng-class="{ 'quiz-item-last' : $last }" ng-repeat="quiz in vm.favouriteQuizzes | filter: vm.searchQuiz track by $index">
+                                <quiz-item copy="vm.copyQuiz(source, position)"
+                                           remove="vm.removeQuiz(id, source, position)"
+                                           participate="vm.participate(quizId)"
+                                           quiz="quiz"
+                                           list="favouriteQuizzes"
+                                           remove-from-favourite-list="vm.removeFromFavouriteList(id)"
+                                           index="{{ $index }}"
+                                           tab="0"
+                                           disable-edit="true"
+                                           assign="vm.assign(quizTitle)">
+                                </quiz-item>
+                            </div>
+                            <div ng-hide="vm.favouriteQuizzes.length">
+                                Sorry, here no any favourite quizzes
+                            </div>
+                        </uib-tab>
+                        <uib-tab index="3" select="vm.getPublicQuizzes()" heading="Public Quizzes">
+                            <div ng-class="{ 'quiz-item-last' : $last }" ng-repeat="quiz in vm.publicQuizzes | filter: { title: vm.searchText } track by $index">
+                                <quiz-item copy="vm.copyQuiz(source, position)"
+                                           remove="vm.removeQuiz(id, source, position)"
+                                           participate="vm.participate(quizId)"
+                                           quiz="quiz" list="publicQuizzes" index="{{ $index }}"
+                                           disable-edit="true"
+                                           tab="3"
+                                           assign="vm.assign(quizTitle)"
+                                           alert-options="vm.alertOptions">
+                                </quiz-item>
+                            </div>
+                            <div ng-hide="vm.publicQuizzes.length">
+                                No public quizzes available now
+                            </div>
+                        </uib-tab>
+                    </uib-tabset>
+                </div>
+            </div>
+        </div>
+</div>
+
+<alert options="vm.alertOptions"></alert>

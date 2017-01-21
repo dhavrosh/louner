@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="../public/css/play.quiz.css">
+
+<p class="quiz-title">{{ vm.title }}</p>
+<div class="play-quiz-content-container-wrapper" ng-cloak>
+
+    <alert options="vm.alertOptions"></alert>
+        <div class="play-content-container">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8" style="text-align: center; margin-top: 50px">
+                    <youtube-video video-id="vm.videoId" player-vars="vm.playerVars"
+                                   player-width="'100%'"></youtube-video>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+            <div class="row buttons-row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6" style="text-align: center">
+                    <button class="primary-btn" ng-click="vm.next()">
+                        <span class="primary-btn-text">Next ></span>
+                    </button>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+        </div>
+
+</div>
